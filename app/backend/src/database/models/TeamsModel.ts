@@ -27,3 +27,5 @@ Teams.init(
     modelName: 'teams',
   },
 );
+
+export default Teams;
