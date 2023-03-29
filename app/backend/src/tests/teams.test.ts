@@ -13,4 +13,13 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('')
+describe('Tests teams model', () => {
+  before(() => sinon.stub(Teams, 'findAll').resolves(teamsMock as Teams[]));
+  after(() => sinon.restore);
+
+  it('testa a requisição a todos os times', async () => {
+    const result = await chai.request(app).get('/teams');
+    expect(result.body).to.be.deep.equal(teamsMock);
+    expect(result.status).to.equal(200);
+  })
+})
