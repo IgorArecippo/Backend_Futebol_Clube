@@ -19,12 +19,12 @@ describe('Tests teams model', () => {
     expect(result.status).to.equal(200);
   })
 
-  // before(() => sinon.stub(Teams, 'findById').resolves(teamsMock as Teams));
-  // after(() => sinon.restore);
-  // it('testa a requisição a um time por id', async () => {
-  //   const result = await chai.request(app).get('/teams:id');
-  //   expect(result.body).to.be.deep.equal(teamIdMock);
-  //   expect(result.status).to.be.equal(200);
-  // })
+  before(() => sinon.stub(Teams, 'findOne').resolves(teamIdMock as Teams));
+  after(() => sinon.restore);
+  it('testa a requisição a um time por id', async () => {
+    const result = await chai.request(app).get('/teams/:id');
+    expect(result.body).to.be.deep.equal(teamIdMock);
+    expect(result.status).to.be.equal(200);
+  })
   
 })
