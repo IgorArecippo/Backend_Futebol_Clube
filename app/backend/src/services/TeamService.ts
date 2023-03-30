@@ -6,4 +6,13 @@ export default class TeamService {
     const teams = await Teams.findAll();
     return teams;
   };
+
+  getById = async (id: string): Promise<ITeams> => {
+    const numberId = parseFloat(id);
+    const teamId = await Teams.findOne({ where: { id: numberId } });
+    if (!teamId) {
+      throw new Error();
+    }
+    return teamId;
+  };
 }

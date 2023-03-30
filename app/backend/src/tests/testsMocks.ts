@@ -64,3 +64,8 @@ export const teamsMock = [
     "teamName": "São Paulo"
   }
 ];
+
+export const teamIdMock = {
+  "id": 5,
+  "teamName": "Cruzeiro"
+}

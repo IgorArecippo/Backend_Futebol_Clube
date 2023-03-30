@@ -5,7 +5,7 @@ interface ITeams {
 
 interface ITeamsService {
   getAll(): Promise<ITeams[]>,
-  // getById(id: number): Promise<ITeams>,
+  getById(id: string): Promise<ITeams>,
 }
 
 export { ITeams, ITeamsService };
