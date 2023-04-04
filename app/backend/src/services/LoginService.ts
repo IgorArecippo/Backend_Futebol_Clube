@@ -5,7 +5,7 @@ import { IUser } from '../interfaces/IUser';
 import Users from '../database/models/UsersModel';
 import ILogin from '../interfaces/ILogin';
 
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET || 'amomeucachorro';
 
 export default class LoginService {
   login = async (user: ILogin): Promise<string> => {

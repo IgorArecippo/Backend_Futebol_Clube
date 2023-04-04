@@ -1,7 +1,7 @@
 import { ErrorRequestHandler } from 'express';
 
 const midError: ErrorRequestHandler = (error, _req, res, _next) => {
-  // console.log(error);
+  console.log(error);
   if (error.status) {
     return res.status(error.status).json({ message: error.message });
   }
