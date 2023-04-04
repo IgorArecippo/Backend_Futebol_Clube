@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import { compareSync } from 'bcryptjs';
 import UnauthorizedError from '../middlewares/midBadRequest';
-import { IUser } from '../interfaces/IUser';
+import { IRole, IUser } from '../interfaces/IUser';
 import Users from '../database/models/UsersModel';
 import ILogin from '../interfaces/ILogin';
 
@@ -27,5 +27,19 @@ export default class LoginService {
     const payload = { id: checkUser.id, email: checkUser.email };
     const jwtToken = sign(payload, jwtSecret as string);
     return jwtToken;
+  };
+
+  getRole = async (id: number, authorization: string | string[] | void): Promise<IRole> => {
+    if (!authorization) {
+      throw new UnauthorizedError('Token not found');
+    }
+    if (authorization.length < 16) {
+      throw new UnauthorizedError('Token must be a valid token');
+    }
+    const userRole = await Users.findOne({ where: { id } });
+    if (userRole) {
+      return { role: userRole.role };
+    }
+    return { role: 'not admin' };
   };
 }

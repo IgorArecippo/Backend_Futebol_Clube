@@ -15,10 +15,14 @@ const router = Router();
 router.get('/teams', (req: Request, res: Response) => teamsController.getAll(req, res));
 router.get('/teams/:id', (req: Request, res: Response) => teamsController.getById(req, res));
 router
+  .get(
+    '/login/role',
+    (req: Request, res: Response, next: NextFunction) => loginController.getRole(req, res, next),
+  );
+router
   .post(
     '/login',
     ValiFields,
     (req: Request, res: Response, next: NextFunction) => loginController.login(req, res, next),
   );
-
 export default router;
