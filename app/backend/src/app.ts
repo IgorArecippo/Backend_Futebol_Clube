@@ -1,4 +1,5 @@
 import * as express from 'express';
+import midError from './middlewares/midError';
 import router from './routes';
 
 class App {
@@ -25,6 +26,7 @@ class App {
     this.app.use(accessControl);
 
     this.app.use(router);
+    this.app.use(midError);
   }
 
   public start(PORT: string | number):void {
