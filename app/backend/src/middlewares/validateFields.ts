@@ -8,7 +8,7 @@ const ValiFields: RequestHandler = (req: Request, res: Response, next: NextFunct
   //   }
   // }
   // next();
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password } = req.body;
   const regex = /\S+@\S+\.\S+/;
   const emailTest = regex.test(email);

@@ -11,7 +11,7 @@ interface IRole {
 
 interface IUserService {
   login(user: ILogin): Promise<string>,
-  getRole(userId: number, authorization: string | string[] | void): Promise<IRole>
+  getRole(authorization: any): Promise<IRole>
 }
 
 export { IUser, IRole, IUserService };
