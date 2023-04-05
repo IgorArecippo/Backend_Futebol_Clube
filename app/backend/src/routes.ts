@@ -4,6 +4,7 @@ import TeamService from './services/TeamService';
 import LoginController from './controllers/LoginController';
 import LoginService from './services/LoginService';
 import ValiFields from './middlewares/validateFields';
+import validateToken from './middlewares/validateToken';
 
 const teamService = new TeamService();
 const teamsController = new TeamsController(teamService);
@@ -17,6 +18,7 @@ router.get('/teams/:id', (req: Request, res: Response) => teamsController.getByI
 router
   .get(
     '/login/role',
+    validateToken,
     (req: Request, res: Response, next: NextFunction) => loginController.getRole(req, res, next),
   );
 router
