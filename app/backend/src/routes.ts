@@ -5,11 +5,15 @@ import LoginController from './controllers/LoginController';
 import LoginService from './services/LoginService';
 import ValiFields from './middlewares/validateFields';
 import validateToken from './middlewares/validateToken';
+import MatchesController from './controllers/MatchesController';
+import MatchService from './services/MatchesService';
 
 const teamService = new TeamService();
 const teamsController = new TeamsController(teamService);
 const loginService = new LoginService();
 const loginController = new LoginController(loginService);
+const matchesService = new MatchService();
+const matchesController = new MatchesController(matchesService);
 
 const router = Router();
 
@@ -27,4 +31,5 @@ router
     ValiFields,
     (req: Request, res: Response, next: NextFunction) => loginController.login(req, res, next),
   );
+router.get('/matches', (req: Request, res: Response) => matchesController.getMatches(req, res));
 export default router;
