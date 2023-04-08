@@ -7,6 +7,7 @@ import ValiFields from './middlewares/validateFields';
 import validateToken from './middlewares/validateToken';
 import MatchesController from './controllers/MatchesController';
 import MatchService from './services/MatchesService';
+import valiMatch from './middlewares/validateMatch';
 
 const teamService = new TeamService();
 const teamsController = new TeamsController(teamService);
@@ -44,6 +45,7 @@ router.patch(
 router.post(
   '/matches',
   validateToken,
+  valiMatch,
   (req: Request, res: Response) => matchesController.newMatch(req, res),
 );
 export default router;
