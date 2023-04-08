@@ -8,4 +8,5 @@ export interface IMatches extends Matches {
 export interface IMatchesService {
   getMatches(): Promise<IMatches[]>
   getInProgress(prog: boolean): Promise<IMatches[]>
+  finishMatch(id: number): Promise<object>
 }

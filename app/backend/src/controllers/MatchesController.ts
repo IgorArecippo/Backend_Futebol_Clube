@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { IMatchesService } from '../interfaces/IMatch';
 
 export default class MatchesController {
@@ -16,5 +16,16 @@ export default class MatchesController {
     const prog = Boolean(inProgress === 'true');
     const matchesInProgress = await this.matchesService.getInProgress(prog);
     return res.status(200).json(matchesInProgress);
+  }
+
+  async finishMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const idNumber = parseFloat(id);
+      const finished = await this.matchesService.finishMatch(idNumber);
+      return res.status(200).json(finished);
+    } catch (error) {
+      next(error);
+    }
   }
 }

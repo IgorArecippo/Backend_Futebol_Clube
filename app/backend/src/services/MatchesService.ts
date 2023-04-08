@@ -24,4 +24,9 @@ export default class MatchService {
       ] });
     return matchesInProgress;
   };
+
+  finishMatch = async (id: number) => {
+    await Matches.update({ inProgress: 'false' }, { where: { id } });
+    return { message: 'Finished' };
+  };
 }

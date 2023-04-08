@@ -32,4 +32,10 @@ router
     (req: Request, res: Response, next: NextFunction) => loginController.login(req, res, next),
   );
 router.get('/matches', (req: Request, res: Response) => matchesController.getMatches(req, res));
+router.patch(
+  '/matches/:id/finish',
+  validateToken,
+  (req: Request, res: Response, next: NextFunction) => matchesController
+    .finishMatch(req, res, next),
+);
 export default router;
