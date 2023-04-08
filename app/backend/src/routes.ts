@@ -19,23 +19,31 @@ const router = Router();
 
 router.get('/teams', (req: Request, res: Response) => teamsController.getAll(req, res));
 router.get('/teams/:id', (req: Request, res: Response) => teamsController.getById(req, res));
-router
-  .get(
-    '/login/role',
-    validateToken,
-    (req: Request, res: Response, next: NextFunction) => loginController.getRole(req, res, next),
-  );
-router
-  .post(
-    '/login',
-    ValiFields,
-    (req: Request, res: Response, next: NextFunction) => loginController.login(req, res, next),
-  );
+router.get(
+  '/login/role',
+  validateToken,
+  (req: Request, res: Response, next: NextFunction) => loginController.getRole(req, res, next),
+);
+router.post(
+  '/login',
+  ValiFields,
+  (req: Request, res: Response, next: NextFunction) => loginController.login(req, res, next),
+);
 router.get('/matches', (req: Request, res: Response) => matchesController.getMatches(req, res));
 router.patch(
   '/matches/:id/finish',
   validateToken,
   (req: Request, res: Response, next: NextFunction) => matchesController
     .finishMatch(req, res, next),
+);
+router.patch(
+  '/matches/:id',
+  validateToken,
+  (req: Request, res: Response) => matchesController.updateMatch(req, res),
+);
+router.post(
+  '/matches',
+  validateToken,
+  (req: Request, res: Response) => matchesController.newMatch(req, res),
 );
 export default router;

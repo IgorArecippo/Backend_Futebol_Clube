@@ -2,6 +2,7 @@
 import UnauthorizedError from '../middlewares/midBadRequest';
 import Matches from '../database/models/MatchesModel';
 import Teams from '../database/models/TeamsModel';
+import { INew } from '../interfaces/IMatch';
 
 export default class MatchService {
   getMatches = async () => {
@@ -28,5 +29,14 @@ export default class MatchService {
   finishMatch = async (id: number) => {
     await Matches.update({ inProgress: 'false' }, { where: { id } });
     return { message: 'Finished' };
+  };
+
+  updateMatch = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  };
+
+  newMatch = async (match: INew) => {
+    const newMatch = await Matches.create({ match, inProgress: true });
+    return newMatch;
   };
 }
