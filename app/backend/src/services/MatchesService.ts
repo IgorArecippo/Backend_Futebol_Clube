@@ -36,7 +36,9 @@ export default class MatchService {
   };
 
   newMatch = async (match: INew) => {
-    const newMatch = await Matches.create({ match, inProgress: true });
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals } = match;
+    const newMatch = await Matches.create({
+      homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress: true });
     return newMatch;
   };
 }
