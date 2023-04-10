@@ -8,6 +8,8 @@ import validateToken from './middlewares/validateToken';
 import MatchesController from './controllers/MatchesController';
 import MatchService from './services/MatchesService';
 import valiMatch from './middlewares/validateMatch';
+import LeaderboardService from './services/LeaderboardService';
+import LeaderboardController from './controllers/LeaderboardController';
 
 const teamService = new TeamService();
 const teamsController = new TeamsController(teamService);
@@ -15,6 +17,8 @@ const loginService = new LoginService();
 const loginController = new LoginController(loginService);
 const matchesService = new MatchService();
 const matchesController = new MatchesController(matchesService);
+const leaderboardService = new LeaderboardService();
+const leaderboardController = new LeaderboardController(leaderboardService);
 
 const router = Router();
 
@@ -47,5 +51,9 @@ router.post(
   validateToken,
   valiMatch,
   (req: Request, res: Response) => matchesController.newMatch(req, res),
+);
+router.get(
+  '/leaderboard/home',
+  (req: Request, res: Response) => leaderboardController.getAll(req, res),
 );
 export default router;
